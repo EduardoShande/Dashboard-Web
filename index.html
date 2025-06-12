@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Análisis P2P Binance</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fab fa-bitcoin crypto-icon"></i>
+                <span class="brand-text">Binance P2P Analytics</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#dashboard" class="nav-link active">Dashboard</a>
+                <a href="#about" class="nav-link">Acerca de</a>
+                <a href="#methodology" class="nav-link">Metodología</a>
+                <a href="#contact" class="nav-link">Contacto</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Análisis P2P Binance</span>
+                    <br>Dashboard Interactivo
+                </h1>
+                <p class="hero-description">
+                    Explora tendencias de mercado, volúmenes de trading y patrones de comportamiento 
+                    en el ecosistema P2P de Binance con visualizaciones en tiempo real.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="statAds">0</div>
+                        <div class="stat-label">Anuncios Analizados</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="statCountries">0</div>
+                        <div class="stat-label">Países</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="statCurrencies">0</div>
+                        <div class="stat-label">Monedas</div>
+                    </div>
+                </div>
+                <a href="#dashboard" class="cta-button">
+                    <span>Ver Dashboard</span>
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-elements">
+                    <div class="crypto-card btc">
+                        <i class="fab fa-bitcoin"></i>
+                        <span>BTC</span>
+                    </div>
+                    <div class="crypto-card eth">
+                        <i class="fab fa-ethereum"></i>
+                        <span>ETH</span>
+                    </div>
+                    <div class="crypto-card usdt">
+                        <div class="usdt-icon">₮</div>
+                        <span>USDT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg"></div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="dashboard-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Dashboard Interactivo</h2>
+                <p class="section-subtitle">
+                    Visualización completa de datos P2P con métricas actualizadas y análisis profundo
+                </p>
+            </div>
+            
+            <!-- Dashboard Controls -->
+            <div class="dashboard-controls">
+                <div class="control-group">
+                    <button class="control-btn active" data-view="full">
+                        <i class="fas fa-expand"></i>
+                        Vista Completa
+                    </button>
+                    <button class="control-btn" data-view="mobile">
+                        <i class="fas fa-mobile-alt"></i>
+                        Vista Móvil
+                    </button>
+                </div>
+                <div class="control-group">
+                    <button class="refresh-btn" id="refreshDashboard">
+                        <i class="fas fa-sync-alt"></i>
+                        Actualizar
+                    </button>
+                    <button class="fullscreen-btn" id="fullscreenBtn">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                        Pantalla Completa
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Container -->
+            <div class="dashboard-container">
+                <div class="dashboard-frame" id="dashboardFrame">
+                    <!-- Aquí va tu iframe de Power BI -->
+                    <iframe 
+                        id="powerBiFrame"
+                        src="TU_URL_DE_POWER_BI_AQUI"
+                        frameborder="0" 
+                        allowfullscreen="true">
+                    </iframe>
+                    
+                    <!-- Loading State -->
+                    <div class="dashboard-loading" id="dashboardLoading">
+                        <div class="loading-spinner"></div>
+                        <p>Cargando dashboard...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2 class="section-title">Sobre el Proyecto</h2>
+                    <p>
+                        Este dashboard presenta un análisis exhaustivo de los anuncios P2P de Binance, 
+                        proporcionando insights valiosos sobre patrones de trading, distribución geográfica 
+                        y tendencias de mercado en el ecosistema de intercambio peer-to-peer.
+                    </p>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-chart-line"></i>
+                            <h4>Análisis de Tendencias</h4>
+                            <p>Identificación de patrones y tendencias en el mercado P2P</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-globe"></i>
+                            <h4>Cobertura Global</h4>
+                            <p>Datos de múltiples países y regiones</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-coins"></i>
+                            <h4>Multi-Moneda</h4>
+                            <p>Análisis de diferentes criptomonedas y fiat</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-sync"></i>
+                            <h4>Datos Actualizados</h4>
+                            <p>Información procesada regularmente</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Big Data</h3>
+                                <p>Procesamiento de miles de anuncios</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>IA Analytics</h3>
+                                <p>Análisis inteligente de patrones</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Visualización</h3>
+                                <p>Dashboards interactivos avanzados</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section id="methodology" class="methodology-section">
+        <div class="container">
+            <h2 class="section-title">Metodología</h2>
+            <div class="methodology-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h4>1. Extracción de Datos</h4>
+                        <p>Recopilación automatizada de anuncios P2P de Binance mediante APIs y web scraping ético</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h4>2. Procesamiento</h4>
+                        <p>Limpieza, normalización y estructuración de datos para análisis consistente</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h4>3. Análisis</h4>
+                        <p>Aplicación de técnicas estadísticas y de machine learning para extraer insights</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-presentation"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h4>4. Visualización</h4>
+                        <p>Creación de dashboards interactivos con Power BI para presentación de resultados</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <i class="fab fa-bitcoin crypto-icon"></i>
+                        <span>Binance P2P Analytics</span>
+                    </div>
+                    <p>Análisis avanzado de datos P2P para insights de mercado</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces</h4>
+                    <ul>
+                        <li><a href="#dashboard">Dashboard</a></li>
+                        <li><a href="#about">Acerca de</a></li>
+                        <li><a href="#methodology">Metodología</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Binance P2P Analytics. Proyecto independiente con fines educativos.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
