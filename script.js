@@ -52,7 +52,7 @@ class P2PDashboard {
         this.startAutoRefresh();
         this.initAnimations();
         
-        console.log('🚀 P2P Dashboard initialized successfully');
+        console.log('P2P Dashboard initialized successfully');
     }
     
     // Theme Management
@@ -414,9 +414,9 @@ class P2PDashboard {
     
     updateStats() {
         // Actualizar total de anuncios
-        if (this.elements.totalAds) {
-            this.animateNumber(this.elements.totalAds, this.mockData.totalAds);
-        }
+        // if (this.elements.totalAds) {
+        //     this.animateNumber(this.elements.totalAds, this.mockData.totalAds);
+        // }
         
         // Actualizar rangos de precios
         if (this.mockData.buyOrders.length > 0) {
