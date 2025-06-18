@@ -60,7 +60,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <span class="highlight">Bolivia</span>
                 </h1>
                 <p class="hero-subtitle">
-                    Análisis en tiempo real del mercado P2P de USDT y USDC en Bolivia
+                    Análisis en tiempo real del mercado P2P de USDT en Bolivia
                 </p>
                 <div class="hero-stats">
                     <div class="stat-card">
@@ -68,7 +68,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <div class="stat-info">
-                            <span class="stat-number" id="totalAds">0</span>
+                            <span class="stat-number" id="totalAds">210</span>
                             <span class="stat-label">Anuncios Activos</span>
                         </div>
                     </div>
@@ -77,7 +77,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <i class="fas fa-coins"></i>
                         </div>
                         <div class="stat-info">
-                            <span class="stat-number">2</span>
+                            <span class="stat-number">1</span>
                             <span class="stat-label">Criptomonedas</span>
                         </div>
                     </div>
@@ -86,7 +86,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <i class="fas fa-clock"></i>
                         </div>
                         <div class="stat-info">
-                            <span class="stat-number" id="lastUpdate">---</span>
+                            <span class="stat-number" id="lastUpdate">10:00</span>
                             <span class="stat-label">Última Actualización</span>
                         </div>
                     </div>
@@ -98,10 +98,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <i class="fab fa-bitcoin"></i>
                         <span>USDT</span>
                     </div>
-                    <div class="crypto-icon usdc">
+                    <!-- <div class="crypto-icon usdc">
                         <i class="fas fa-dollar-sign"></i>
                         <span>USDC</span>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -153,40 +153,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Dashboard Section -->
     <main class="dashboard-section" id="dashboard">
-        <div class="container">
-            <div class="dashboard-header">
-                <h2 class="section-title">
-                    <i class="fas fa-analytics"></i>
-                    Dashboard Interactivo
-                </h2>
-                <div class="dashboard-controls">
-                    <button class="control-btn" id="refreshBtn">
-                        <i class="fas fa-sync-alt"></i>
-                        Actualizar
-                    </button>
-                    <button class="control-btn" id="fullscreenBtn">
-                        <i class="fas fa-expand"></i>
-                        Pantalla Completa
-                    </button>
-                </div>
-            </div>
-            <div class="dashboard-container">
-                <div class="dashboard-wrapper">
-                    <div class="loading-overlay" id="loadingOverlay">
-                        <div class="loading-spinner">
-                            <i class="fas fa-spinner fa-spin"></i>
-                            <span>Cargando dashboard...</span>
-                        </div>
-                    </div>
-                    <iframe 
-                        id="dashboardFrame"
-                        src="about:blank" 
-                        frameborder="0" 
-                        allowfullscreen
-                        title="Dashboard P2P Binance Bolivia">
-                    </iframe>
-                </div>
-            </div>
+        <div class="dashboard container">
+            <img src="images/dashboard18junio.png" alt="Dashboard bolivia USDT" id="dashboardImg">
         </div>
     </main>
 
@@ -201,13 +169,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </h2>
                     <p class="about-description">
                         Este dashboard presenta un análisis detallado del mercado P2P de Binance específicamente 
-                        para Bolivia, enfocándose en las criptomonedas USDT y USDC. Los datos incluyen tanto 
-                        órdenes de compra como de venta, proporcionando una visión completa del mercado local.
+                        para Bolivia, enfocándose en la criptomoneda USDT. Los datos incluyen 
+                        órdenes de compra, proporcionando una visión completa del mercado local.
                     </p>
                     <div class="features">
                         <div class="feature">
                             <i class="fas fa-check-circle"></i>
-                            <span>Datos actualizados en tiempo real</span>
+                            <span>Datos actualizados</span>
                         </div>
                         <div class="feature">
                             <i class="fas fa-check-circle"></i>
@@ -215,11 +183,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </div>
                         <div class="feature">
                             <i class="fas fa-check-circle"></i>
-                            <span>Cobertura completa de USDT y USDC</span>
+                            <span>Cobertura completa de USDT</span>
                         </div>
                         <div class="feature">
                             <i class="fas fa-check-circle"></i>
-                            <span>Visualizaciones interactivas</span>
+                            <span>Visualizaciones</span>
                         </div>
                     </div>
                 </div>
@@ -271,14 +239,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <i class="fas fa-coins"></i>
                     </div>
                     <h3>Criptomonedas</h3>
-                    <p>USDT (Tether) y USDC (USD Coin)</p>
+                    <p>USDT (Tether)</p>
                 </div>
                 <div class="data-card">
                     <div class="data-icon">
                         <i class="fas fa-exchange-alt"></i>
                     </div>
                     <h3>Tipos de Orden</h3>
-                    <p>Órdenes de compra (Buy) y venta (Sell)</p>
+                    <p>Órdenes de compra (Buy)</p>
                 </div>
                 <div class="data-card">
                     <div class="data-icon">
@@ -310,7 +278,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="footer-section">
                     <h4>Contacto</h4>
                     <p>Para consultas sobre los datos o el dashboard, por favor contactanos.</p>
-                    <a href="https://wa.me/+59164603790?text=Hello how are you?">
+                    <a href="https://wa.me/+59163433438?text=">
                         <img src="https://cdn-icons-png.flaticon.com/128/1384/1384023.png" alt="whatsapp-icon" height="50px" width="50px">
                     </a>
                 </div>
