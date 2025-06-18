@@ -37,7 +37,7 @@ class P2PDashboard {
             totalAds: 0,
             buyOrders: [],
             sellOrders: [],
-            lastUpdate: new Date()
+            lastUpdate: '10:00'
         };
         
         this.init();
@@ -451,15 +451,15 @@ class P2PDashboard {
     }
     
     updateLastUpdateTime() {
-        if (this.elements.lastUpdate) {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('es-BO', { 
-                hour: '2-digit', 
-                minute: '2-digit',
-                hour12: false
-            });
-            this.elements.lastUpdate.textContent = timeString;
-        }
+        // if (this.elements.lastUpdate) {
+        //     const now = new Date();
+        //     const timeString = now.toLocaleTimeString('es-BO', { 
+        //         hour: '2-digit', 
+        //         minute: '2-digit',
+        //         hour12: false
+        //     });        
+        // }
+        this.elements.lastUpdate.textContent = '10:00';
     }
     
     // Utility Functions

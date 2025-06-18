@@ -333,6 +333,7 @@ body {
     color: var(--text-white);
     position: relative;
     animation: float 3s ease-in-out infinite;
+    left: 80px;
 }
 
 .crypto-icon.usdt {
@@ -453,6 +454,12 @@ body {
 }
 
 /* Dashboard Section */
+#dashboardImg {
+    position: relative;
+    right: 90px;
+}
+
+
 .dashboard-section {
     padding: var(--spacing-xl) 0;
     background: var(--bg-primary);
