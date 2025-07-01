@@ -1,0 +1,130 @@
+[
+  {
+    "usdtDisponible": "46416.61378083",
+    "minimo": "3000",
+    "maximo": "207585",
+    "usuario": "Latintrader",
+    "precio": "15.94",
+    "positiveRate": 0.98753078
+  },
+  {
+    "usdtDisponible": "35676.04586716",
+    "minimo": "3000",
+    "maximo": "207585",
+    "usuario": "DigitalBrok",
+    "precio": "15.94",
+    "positiveRate": 0.99722111
+  },
+  {
+    "usdtDisponible": "4924.62311558",
+    "minimo": "1000",
+    "maximo": "1800",
+    "usuario": "Five_Stars69",
+    "precio": "15.93",
+    "positiveRate": 0.99257522
+  },
+  {
+    "usdtDisponible": "63602.82464399",
+    "minimo": "1000",
+    "maximo": "30000",
+    "usuario": "Real, not fake",
+    "precio": "15.92",
+    "positiveRate": 1.0
+  },
+  {
+    "usdtDisponible": "925.00000000",
+    "minimo": "1000",
+    "maximo": "207585",
+    "usuario": "Arieta",
+    "precio": "15.90",
+    "positiveRate": 0.99520856
+  },
+  {
+    "usdtDisponible": "703.73535544",
+    "minimo": "500",
+    "maximo": "10000",
+    "usuario": "Scorpions09",
+    "precio": "15.86",
+    "positiveRate": 1.0
+  },
+  {
+    "usdtDisponible": "18000.00000000",
+    "minimo": "4000",
+    "maximo": "207000",
+    "usuario": "Viernes",
+    "precio": "15.85",
+    "positiveRate": 0.99976749
+  },
+  {
+    "usdtDisponible": "1500.00000000",
+    "minimo": "4000",
+    "maximo": "17000",
+    "usuario": "JoseLHCrypSeg",
+    "precio": "15.70",
+    "positiveRate": 1.0
+  },
+  {
+    "usdtDisponible": "249.34610063",
+    "minimo": "120",
+    "maximo": "4000",
+    "usuario": "Trader1_pro",
+    "precio": "15.60",
+    "positiveRate": 0.98858677
+  },
+  {
+    "usdtDisponible": "1983.67058303",
+    "minimo": "55",
+    "maximo": "25000",
+    "usuario": "QRTraderBo",
+    "precio": "15.40",
+    "positiveRate": 0.99019607
+  },
+  {
+    "usdtDisponible": "440.00000000",
+    "minimo": "3400",
+    "maximo": "138390",
+    "usuario": "rapidoysencillo1",
+    "precio": "15.00",
+    "positiveRate": 1.0
+  },
+  {
+    "usdtDisponible": "30000.00000000",
+    "minimo": "2000",
+    "maximo": "69195",
+    "usuario": "billtraders",
+    "precio": "13.45",
+    "positiveRate": 0.98854852
+  },
+  {
+    "usdtDisponible": "100.00000000",
+    "minimo": "56",
+    "maximo": "220",
+    "usuario": "paad13",
+    "precio": "12.20",
+    "positiveRate": 1.0
+  },
+  {
+    "usdtDisponible": "700.00000000",
+    "minimo": "4000",
+    "maximo": "8200",
+    "usuario": "P2P-c53d5eer",
+    "precio": "11.24",
+    "positiveRate": 0.93333333
+  },
+  {
+    "usdtDisponible": "200.00000000",
+    "minimo": "2200",
+    "maximo": "13000",
+    "usuario": "vargas_cripto_bo",
+    "precio": "11.00",
+    "positiveRate": 1.0
+  },
+  {
+    "usdtDisponible": "19906.42648119",
+    "minimo": "55",
+    "maximo": "3000",
+    "usuario": "Estimado-Usuario",
+    "precio": "9.68",
+    "positiveRate": 1.0
+  }
+]
