@@ -24,11 +24,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
         <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/jquery.dataTables.min.css">
-    <!-- Font Awesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    
+    <!-- jQuery (required for DataTables) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    
     <!-- CSS personalizado -->
     <link rel="stylesheet" href="static/css/tables.css">
 
@@ -166,7 +169,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Dashboard Section -->
     <main class="dashboard-section" id="dashboard">
         <div class="dashboard container">
-            <img src="images/dashboard15jul.png" alt="Dashboard bolivia USDT" id="dashboardImg">
+            
+            <div class="container">
+        <!-- User USDT Offers Table -->
+        <div class="table-section">
+            <h2>📊 Oferta USDT por usuario</h2>
+            <table id="userTable" class="display">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Precio Promedio</th>
+                        <th>USDT Disponible</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Price Offers Table -->
+        <div class="table-section">
+            <h2>📉 Oferta por precio</h2>
+            <table id="priceTable" class="display">
+                <thead>
+                    <tr>
+                        <th>Precio</th>
+                        <th>USDT Disponible</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
         </div>
     </main>
     <!-- About Section -->
@@ -214,146 +252,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             </div>
                             <div class="flow-step">
                                 <i class="fas fa-database"></i>
-                                <span>Procesamiento de Datos</span>.hl_page-creator--content .row-fJNTXs9OZx { margin-top: 40px;
-                                margin-bottom: 0px;
-                                margin-right: 0px; }  .hl_page-creator--content .row-fJNTXs9OZx {
-                                    
-                                    padding-left: 0px;
-                                padding-right: 0px;
-                                padding-top: 35px;
-                                padding-bottom: 30px;
-                                background-color: var(--color-m1tdv4ke);
-                                border-color: var(--transparent);
-                                border-width: 1px;
-                                border-style: solid;
-                                  }
-                                    .hl_page-creator--content .image-YXiNYwtfMc { margin-top: 0px;
-                                margin-bottom: 10px; }  
-                                        .hl_page-creator--content .image-YXiNYwtfMc .image-container img {
-                                        box-shadow: undefined;
-                                      }
-                                      .hl_page-creator--content .cimage-YXiNYwtfMc {
-                                    
-                                    padding-left: 10px;
-                                padding-right: 10px;
-                                padding-top: 10px;
-                                padding-bottom: 10px;
-                                background-color: var(--transparent);
-                                opacity: 1;
-                                text-align: center;
-                                  }
-                                     Image.hl_page-creator--content #sub-heading-sW1spjN5dZ { margin-top: 0px;
-                                margin-bottom: 25px; }  .hl_page-creator--content .csub-heading-sW1spjN5dZ {
-                                    font-family: var(--playfair-display);
-                                    background-color: var(--transparent);
-                                color: var(--black);
-                                bold-text-color: var(--color-m1tdwbyo);
-                                italic-text-color: var(--color-ljn2bjhz);
-                                underline-text-color: var(--color-ljn2bjhz);
-                                link-text-color: var(--color-ljn2bjhz);
-                                icon-color: var(--color-ljn2bjhz);
-                                font-weight: normal;
-                                padding-left: 15px;
-                                padding-right: 15px;
-                                padding-top: 0px;
-                                padding-bottom: 0px;
-                                opacity: 1;
-                                text-shadow: 0px 0px 0px rgba(0,0,0,0);
-                                border-color: var(--black);
-                                border-width: 2px;
-                                border-style: solid;
-                                line-height: 1.3em;
-                                letter-spacing: 0px;
-                                text-align: center;
-                                  }
-                                     Automated Shade Installation & Setup
-                                          .--mobile .sub-heading-sW1spjN5dZ .ProseMirror {
-                                            font-size: 19px;
-                                            line-height:  1.3em;
-                                            text-align: center;
-                                            font-weight:undefined;
-                                          }
-                                          .sub-heading-sW1spjN5dZ .ProseMirror {
-                                            font-size: 28px;
-                                            text-align: center;
-                                            font-family: inherit;
-                                            color: var(--black);
-                                            overflow-y: visible;
-                                            padding: 0;
-                                            line-height:  1.3em;
-                                            font-weight:undefined;
-                                            /* overflow visible so that popups are visible */
-                                          }
-                                          .sub-heading-sW1spjN5dZ .ProseMirror p:first-child,
-                                          .sub-heading-sW1spjN5dZ .ProseMirror h1:first-child,
-                                          .sub-heading-sW1spjN5dZ .ProseMirror h2:first-child,
-                                          .sub-heading-sW1spjN5dZ .ProseMirror h3:first-child,
-                                          .sub-heading-sW1spjN5dZ .ProseMirror h4:first-child,
-                                          .sub-heading-sW1spjN5dZ .ProseMirror h5:first-child,
-                                          .sub-heading-sW1spjN5dZ .ProseMirror h6:first-child {
-                                            padding-left: 0 !important;
-                                          }
-                                          .sub-heading-sW1spjN5dZ .ProseMirror  strong {
-                                            color: var(--color-m1tdwbyo);
-                                          }
-                                          .sub-heading-sW1spjN5dZ .ProseMirror  em {
-                                            color: var(--color-ljn2bjhz);
-                                          }
-                                          .sub-heading-sW1spjN5dZ .ProseMirror u {
-                                            color: var(--color-ljn2bjhz);
-                                          }
-                                          .sub-heading-sW1spjN5dZ .ProseMirror a,
-                                          .sub-heading-sW1spjN5dZ .ProseMirror a * {
-                                            color: var(--color-ljn2bjhz);
-                                            line-height:1.3em;
-                                          }
-                                
-                                          .sub-heading-sW1spjN5dZ .ProseMirror a:hover {
-                                            text-decoration: underline;
-                                          }
-                                        .sub-heading-sW1spjN5dZ .ProseMirror p:not(:has(strong)),
-                                          .sub-heading-sW1spjN5dZ .ProseMirror h1:not(:has(strong)),
-                                          .sub-heading-sW1spjN5dZ .ProseMirror h2:not(:has(strong)),
-                                          .sub-heading-sW1spjN5dZ .ProseMirror h3:not(:has(strong)),
-                                          .sub-heading-sW1spjN5dZ .ProseMirror h4:not(:has(strong)),
-                                          .sub-heading-sW1spjN5dZ .ProseMirror h5:not(:has(strong)),
-                                          .sub-heading-sW1spjN5dZ .ProseMirror h6:not(:has(strong)),
-                                          .sub-heading-sW1spjN5dZ .ProseMirror ul li p:not(:has(strong)){
-                                            font-weight:undefined;
-                                          }
-                                          .--mobile .sub-heading-sW1spjN5dZ .ProseMirror p:not(:has(strong)),
-                                          .--mobile .sub-heading-sW1spjN5dZ .ProseMirror h1:not(:has(strong)),
-                                          .--mobile .sub-heading-sW1spjN5dZ .ProseMirror h2:not(:has(strong)),
-                                          .--mobile .sub-heading-sW1spjN5dZ .ProseMirror h3:not(:has(strong)),
-                                          .--mobile .sub-heading-sW1spjN5dZ .ProseMirror h4:not(:has(strong)),
-                                          .--mobile .sub-heading-sW1spjN5dZ .ProseMirror h5:not(:has(strong)),
-                                          .--mobile .sub-heading-sW1spjN5dZ .ProseMirror h6:not(:has(strong)),
-                                          .--mobile .sub-heading-sW1spjN5dZ .ProseMirror ul li p:not(:has(strong)){
-                                            font-weight:undefined;
-                                          }
-                                           
-                                      .csub-heading-sW1spjN5dZ .ProseMirror p:first-child:before,
-                                      .csub-heading-sW1spjN5dZ .ProseMirror h1:first-child:before,
-                                      .csub-heading-sW1spjN5dZ .ProseMirror h2:first-child:before,
-                                      .csub-heading-sW1spjN5dZ .ProseMirror h3:first-child:before,
-                                      .csub-heading-sW1spjN5dZ .ProseMirror h4:first-child:before,
-                                      .csub-heading-sW1spjN5dZ .ProseMirror h5:first-child:before,
-                                      .csub-heading-sW1spjN5dZ .ProseMirror h6:first-child:before {
-                                      color: var(--color-ljn2bjhz);
-                                      content: "\";
-                                      font-family: "";
-                                      margin-right:5px;
-                                       font-weight: bold;
-                                      }
-                                
-                                     Sub Headline.hl_page-creator--content .custom-code-pQqLQLJzcd { margin-top: 0px;
-                                margin-bottom: 0px;
-                                margin-left: 0px;
-                                margin-right: 0px; }  .hl_page-creator--content .ccustom-code-pQqLQLJzcd {
-                                    
-                                    
-                                  }
-                                     Custom HTML/JavascriptCustom Code1st Column2 Column Row
+                                <span>Procesamiento de Datos</span>
                             </div>
                             <div class="flow-arrow">
                                 <i class="fas fa-arrow-down"></i>
