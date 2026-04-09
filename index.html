@@ -532,8 +532,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
         <div class="hpc-footer">
-          <span><i class="fas fa-users"></i> <span id="heroOferentes">--</span> oferentes</span>
-          <span><i class="fas fa-filter"></i> Filtro IQR activo</span>
+          <span><i class="fas fa-users"></i> <span id="heroOferentes">--</span> oferentes activos</span>
         </div>
       </div>
     </div>
@@ -572,7 +571,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           Origen: <strong style="color:var(--db-text)">Binance P2P</strong>
         </div>
       </div>
-      <div class="db-badge" id="dbRecords">-- registros tras filtro</div>
+
     </div>
 
     <!-- LOADING STATE -->
@@ -824,8 +823,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       d = d.filter((r) => r.payMethods.includes(state.payMethod));
 
     state.filtered = d;
-    document.getElementById("dbRecords").textContent =
-      d.length + " registros tras filtro";
+
     render();
   }
 
