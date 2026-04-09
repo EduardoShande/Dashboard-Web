@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    
+
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -10,317 +10,1326 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-WM3F2V6C');</script>
 <!-- End Google Tag Manager -->
 
-<!-- Main -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard P2P Binance Bolivia - USDT & USDC</title>
-    <meta name="description" content="Análisis en tiempo real del mercado P2P de Binance en Bolivia para USDT y USDC">
-    <meta name="keywords" content="Binance, P2P, Bolivia, USDT, USDC, Dashboard, Análisis">
+    <title>Dashboard P2P Binance Bolivia - USDT</title>
+    <meta name="description" content="Análisis en tiempo real del mercado P2P de Binance en Bolivia para USDT">
+    <meta name="keywords" content="Binance, P2P, Bolivia, USDT, Dashboard, Análisis">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
+<style>
+/* ═══════════════════════════════════════════════════
+   DASHBOARD VARIABLES
+═══════════════════════════════════════════════════ */
+:root {
+  --db-gold:    #f0b90b;
+  --db-gold-d:  #d9a441;
+  --db-cyan:    #00d4ff;
+  --db-green:   #02c076;
+  --db-red:     #f84960;
+  --db-bg:      #0b0e11;
+  --db-card:    #1e2329;
+  --db-card2:   #2b3139;
+  --db-border:  #2b3139;
+  --db-text:    #f0f0f0;
+  --db-muted:   #848e9c;
+  --db-radius:  10px;
+}
 
-        <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    
-    <!-- jQuery (required for DataTables) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    
-    <!-- CSS personalizado -->
-    <link rel="stylesheet" href="static/css/tables.css">
+/* ═══════════════════════════════════════════════════
+   SECTION WRAPPER
+═══════════════════════════════════════════════════ */
+.dashboard-section {
+  background: var(--db-bg);
+  padding: 0 0 3rem 0;
+}
 
+.db-wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ═══════════════════════════════════════════════════
+   FILTER BAR
+═══════════════════════════════════════════════════ */
+.db-filters {
+  background: #13161b;
+  border-bottom: 1px solid var(--db-border);
+  padding: .75rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  position: sticky;
+  top: 70px;
+  z-index: 50;
+}
+
+.db-filters label { color: var(--db-muted); font-size: .8rem; font-weight: 500; }
+
+.filter-group { display: flex; align-items: center; gap: .5rem; }
+
+.filter-group input[type="text"],
+.filter-group select {
+  background: var(--db-card2);
+  border: 1px solid var(--db-border);
+  color: var(--db-text);
+  border-radius: 6px;
+  padding: .35rem .7rem;
+  font-size: .82rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .2s;
+}
+.filter-group input[type="text"]:focus,
+.filter-group select:focus { border-color: var(--db-gold); }
+
+.filter-group input[type="checkbox"] { accent-color: var(--db-gold); width:15px; height:15px; }
+.filter-group .filter-check-label { color: var(--db-text); font-size:.82rem; cursor:pointer; }
+
+.btn-upload {
+  background: var(--db-gold);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: .38rem .9rem;
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  transition: background .2s;
+}
+.btn-upload:hover { background: var(--db-gold-d); }
+
+/* ═══════════════════════════════════════════════════
+   INFO BAR
+═══════════════════════════════════════════════════ */
+.db-infobar {
+  padding: 1rem 0 .5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.db-title {
+  color: var(--db-text);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.db-subtitle { color: var(--db-muted); font-size: .82rem; }
+.db-badge {
+  margin-left: auto;
+  background: var(--db-card2);
+  color: var(--db-muted);
+  padding: .25rem .75rem;
+  border-radius: 20px;
+  font-size: .78rem;
+}
+
+/* ═══════════════════════════════════════════════════
+   DROP ZONE
+═══════════════════════════════════════════════════ */
+.db-dropzone {
+  border: 2px dashed var(--db-border);
+  border-radius: var(--db-radius);
+  padding: 3rem 2rem;
+  text-align: center;
+  color: var(--db-muted);
+  margin: 2rem 0;
+  transition: border-color .2s, background .2s;
+  cursor: pointer;
+}
+.db-dropzone.drag-over { border-color: var(--db-gold); background: rgba(240,185,11,.05); }
+.db-dropzone i { font-size: 2.5rem; margin-bottom: 1rem; color: var(--db-gold); }
+.db-dropzone p { margin: .4rem 0; font-size: .9rem; }
+.db-dropzone p:first-of-type { color: var(--db-text); font-weight: 600; }
+
+/* ═══════════════════════════════════════════════════
+   CARDS
+═══════════════════════════════════════════════════ */
+.db-card {
+  background: var(--db-card);
+  border: 1px solid var(--db-border);
+  border-radius: var(--db-radius);
+  padding: 1.1rem 1.25rem;
+}
+.db-card-title {
+  color: var(--db-text);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-bottom: .85rem;
+  padding-bottom: .6rem;
+  border-bottom: 1px solid var(--db-border);
+}
+
+/* ═══════════════════════════════════════════════════
+   ROW 1 — GAUGE | KPIs | TOP10
+═══════════════════════════════════════════════════ */
+.db-row1 {
+  display: grid;
+  grid-template-columns: 260px 200px 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+@media (max-width: 900px) {
+  .db-row1 { grid-template-columns: 1fr 1fr; }
+  .db-row1 .db-top10 { grid-column: 1 / -1; }
+}
+@media (max-width: 600px) {
+  .db-row1 { grid-template-columns: 1fr; }
+}
+
+/* Gauge SVG */
+.db-gauge-wrap svg { width: 100%; height: auto; display: block; }
+
+/* KPI Stack */
+.db-kpi-stack { display: flex; flex-direction: column; gap: 1rem; }
+.kpi-card {
+  background: var(--db-card);
+  border: 1px solid var(--db-border);
+  border-radius: var(--db-radius);
+  padding: 1rem 1.25rem;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.kpi-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--db-gold);
+  line-height: 1.1;
+}
+.kpi-label {
+  color: var(--db-muted);
+  font-size: .8rem;
+  margin-top: .35rem;
+}
+
+/* ═══════════════════════════════════════════════════
+   ROW 2 — RANGE CHART (full width)
+═══════════════════════════════════════════════════ */
+.db-row2 { margin-bottom: 1rem; }
+.db-row2 canvas { max-height: 280px; }
+
+/* ═══════════════════════════════════════════════════
+   ROW 3 — TABLES
+═══════════════════════════════════════════════════ */
+.db-row3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 768px) { .db-row3 { grid-template-columns: 1fr; } }
+
+/* Tables */
+.db-table-wrap {
+  overflow-y: auto;
+  max-height: 340px;
+  border-radius: 6px;
+}
+.db-table-wrap::-webkit-scrollbar { width: 5px; }
+.db-table-wrap::-webkit-scrollbar-track { background: var(--db-card2); }
+.db-table-wrap::-webkit-scrollbar-thumb { background: var(--db-border); border-radius: 3px; }
+
+.db-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .82rem;
+}
+.db-table thead th {
+  background: var(--db-card2);
+  color: var(--db-muted);
+  font-weight: 600;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  padding: .6rem .75rem;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: color .15s;
+}
+.db-table thead th:hover { color: var(--db-gold); }
+.db-table thead th.sort-asc::after  { content: " ▲"; color: var(--db-gold); font-size: .65rem; }
+.db-table thead th.sort-desc::after { content: " ▼"; color: var(--db-gold); font-size: .65rem; }
+
+.db-table tbody tr {
+  border-bottom: 1px solid var(--db-border);
+  transition: background .15s;
+}
+.db-table tbody tr:hover { background: rgba(240,185,11,.05); }
+.db-table tbody td { padding: .5rem .75rem; color: var(--db-text); }
+.db-table tbody td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.db-table .total-row td {
+  background: rgba(240,185,11,.08);
+  color: var(--db-gold);
+  font-weight: 700;
+  border-top: 1px solid var(--db-gold-d);
+}
+
+/* Search input inside card */
+.db-table-search {
+  width: 100%;
+  background: var(--db-card2);
+  border: 1px solid var(--db-border);
+  border-radius: 6px;
+  padding: .4rem .75rem;
+  color: var(--db-text);
+  font-size: .82rem;
+  font-family: inherit;
+  margin-bottom: .75rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color .2s;
+}
+.db-table-search:focus { border-color: var(--db-gold); }
+.db-table-search::placeholder { color: var(--db-muted); }
+
+/* Top10 chart height */
+.db-top10 canvas { max-height: 260px; }
+
+/* ═══════════════════════════════════════════════════
+   PROFESSIONAL HERO (override styles.css hero)
+═══════════════════════════════════════════════════ */
+.hero { display: none !important; }
+.hero-pro {
+  position:relative; overflow:hidden; background:#0b0e11;
+  padding:7rem 0 5rem; min-height:90vh;
+  display:flex; align-items:center;
+}
+.hero-grid-bg {
+  position:absolute; inset:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(240,185,11,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(240,185,11,.035) 1px,transparent 1px);
+  background-size:52px 52px;
+}
+.hero-glow-tl {
+  position:absolute; top:-220px; left:-220px;
+  width:680px; height:680px; pointer-events:none;
+  background:radial-gradient(circle,rgba(240,185,11,.10) 0%,transparent 65%);
+}
+.hero-glow-br {
+  position:absolute; bottom:-200px; right:-200px;
+  width:500px; height:500px; pointer-events:none;
+  background:radial-gradient(circle,rgba(0,212,255,.07) 0%,transparent 65%);
+}
+.hero-pro-inner {
+  position:relative; z-index:1; max-width:1400px; width:100%;
+  margin:0 auto; padding:0 2rem;
+  display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;
+}
+@media(max-width:900px){
+  .hero-pro-inner{grid-template-columns:1fr;gap:3rem;}
+  .hero-pro{min-height:auto;padding:6rem 0 3rem;}
+}
+.hero-live-badge {
+  display:inline-flex; align-items:center; gap:.55rem;
+  background:rgba(2,192,118,.1); border:1px solid rgba(2,192,118,.28);
+  color:#02c076; border-radius:30px; padding:.35rem 1rem;
+  font-size:.76rem; font-weight:600; letter-spacing:.06em;
+  text-transform:uppercase; margin-bottom:1.6rem;
+}
+.pulse-dot {
+  width:7px; height:7px; background:#02c076; border-radius:50%;
+  animation:pdot 2s ease-in-out infinite;
+}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
+.hero-pro-title {
+  font-size:clamp(2.2rem,4vw,3.4rem); font-weight:800; color:#f0f0f0;
+  line-height:1.15; margin-bottom:1.3rem; letter-spacing:-.02em;
+}
+.hero-accent{color:#f0b90b;}
+.hero-dim{color:#848e9c;font-weight:400;}
+.hero-pro-sub {
+  color:#848e9c; font-size:1rem; line-height:1.75;
+  margin-bottom:2.2rem; max-width:500px;
+}
+.hero-metrics-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:.85rem; margin-bottom:2.4rem;
+}
+.hero-metric-box {
+  background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07);
+  border-radius:10px; padding:.9rem 1rem; transition:border-color .2s;
+}
+.hero-metric-box:hover{border-color:rgba(240,185,11,.35);}
+.hmb-value{font-size:1.55rem;font-weight:700;color:#f0b90b;line-height:1;margin-bottom:.35rem;}
+.hmb-label{color:#848e9c;font-size:.72rem;font-weight:500;}
+.hmb-label i{margin-right:.3rem;}
+.hero-actions{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;}
+.btn-hero-primary {
+  display:inline-flex; align-items:center; gap:.55rem;
+  background:#f0b90b; color:#000; font-weight:700; font-size:.95rem;
+  padding:.85rem 2rem; border-radius:8px; text-decoration:none;
+  transition:background .2s,transform .2s,box-shadow .2s;
+  box-shadow:0 4px 20px rgba(240,185,11,.3);
+}
+.btn-hero-primary:hover{background:#d9a441;transform:translateY(-2px);box-shadow:0 6px 28px rgba(240,185,11,.45);}
+.hero-update-tag{color:#848e9c;font-size:.82rem;display:flex;align-items:center;gap:.4rem;}
+.hero-update-tag i{color:#f0b90b;}
+/* Price card */
+.hero-price-card {
+  background:rgba(255,255,255,.04); border:1px solid rgba(240,185,11,.18);
+  border-radius:18px; padding:2rem 1.75rem;
+  backdrop-filter:blur(12px); box-shadow:0 8px 40px rgba(0,0,0,.35);
+}
+.hpc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;}
+.hpc-token{display:flex;align-items:center;gap:.75rem;}
+.hpc-token-icon{
+  width:42px;height:42px;background:#f0b90b;color:#000;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:1.15rem;font-weight:700;
+}
+.hpc-token-name{font-weight:700;color:#f0f0f0;font-size:1rem;}
+.hpc-token-sub{color:#848e9c;font-size:.75rem;}
+.hpc-source{
+  background:rgba(240,185,11,.1);border:1px solid rgba(240,185,11,.2);
+  color:#f0b90b;border-radius:6px;padding:.25rem .7rem;font-size:.72rem;font-weight:600;
+}
+.hpc-price-main{font-size:3.2rem;font-weight:800;color:#f0b90b;line-height:1;margin-bottom:.3rem;letter-spacing:-.02em;}
+.hpc-currency{font-size:1.1rem;color:#848e9c;font-weight:400;margin-left:.3rem;}
+.hpc-price-label{color:#848e9c;font-size:.78rem;margin-bottom:1.5rem;}
+.hpc-range{display:flex;background:rgba(255,255,255,.03);border-radius:10px;overflow:hidden;margin-bottom:1rem;}
+.hpc-range-item{flex:1;padding:.8rem;text-align:center;}
+.hpc-range-divider{width:1px;background:rgba(255,255,255,.07);}
+.hpc-ri-label{color:#848e9c;font-size:.7rem;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.04em;}
+.hpc-ri-val{font-weight:700;font-size:.95rem;}
+.hpc-range-item.lo .hpc-ri-val{color:#02c076;}
+.hpc-range-item.mid .hpc-ri-val{color:#f0b90b;}
+.hpc-range-item.hi .hpc-ri-val{color:#f84960;}
+.hpc-bar-wrap{margin-bottom:1.25rem;}
+.hpc-bar-track{height:6px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;margin-bottom:.4rem;}
+.hpc-bar-fill{height:100%;background:linear-gradient(90deg,#02c076,#f0b90b,#f84960);border-radius:4px;transition:width .6s ease;}
+.hpc-bar-labels{display:flex;justify-content:space-between;color:#848e9c;font-size:.68rem;}
+.hpc-footer{display:flex;justify-content:space-between;color:#848e9c;font-size:.78rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.06);}
+.hpc-footer i{margin-right:.3rem;color:#f0b90b;}
+
+</style>
 </head>
 <body>
 
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WM3F2V6C"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
-    <!-- Navigation Header -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <i class="fab fa-bitcoin"></i>
-                <span class="brand-text">P2P Bolivia Analytics</span>
-            </div>
-            <div class="nav-menu">
-                <a href="#dashboard" class="nav-link active">Dashboard</a>
-                <a href="#about" class="nav-link">Acerca</a>
-                <a href="#data" class="nav-link">Datos</a>
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
-            <div class="mobile-menu-toggle" id="mobileToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+<!-- ═══════ NAVBAR ═══════ -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-brand">
+            <i class="fab fa-bitcoin"></i>
+            <span class="brand-text">P2P Bolivia Analytics</span>
         </div>
-    </nav>
+        <div class="nav-menu">
+            <a href="#dashboard" class="nav-link active">Dashboard</a>
+            <a href="#about" class="nav-link">Acerca</a>
+            <a href="#data" class="nav-link">Datos</a>
+            <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+        </div>
+        <div class="mobile-menu-toggle" id="mobileToggle">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
 
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    Dashboard P2P Binance
-                    <span class="highlight">Bolivia</span>
-                </h1>
-                <p class="hero-subtitle">
-                    Análisis en tiempo real del mercado P2P de USDT en Bolivia
+<!-- ═══════ HERO ═══════ -->
+<header class="hero-pro">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow-tl"></div>
+  <div class="hero-glow-br"></div>
+  <div class="hero-pro-inner">
+    <!-- LEFT -->
+    <div class="hero-left">
+      <div class="hero-live-badge">
+        <span class="pulse-dot"></span>
+        Mercado activo &nbsp;&middot;&nbsp; Binance P2P Bolivia
+      </div>
+      <h1 class="hero-pro-title">
+        Inteligencia de Mercado<br>
+        <span class="hero-accent">USDT</span><span class="hero-dim"> / Bolivia</span>
+      </h1>
+      <p class="hero-pro-sub">
+        Análisis cuantitativo del mercado P2P de USDT en Bolivia.<br>
+        Datos filtrados estadísticamente para eliminar valores atípicos.
+      </p>
+      <div class="hero-metrics-grid">
+        <div class="hero-metric-box">
+          <div class="hmb-value" id="heroTotalAds">--</div>
+          <div class="hmb-label"><i class="fas fa-list-ul"></i> Anuncios activos</div>
+        </div>
+        <div class="hero-metric-box">
+          <div class="hmb-value" id="heroAvgPrice">--</div>
+          <div class="hmb-label"><i class="fas fa-balance-scale"></i> Media ponderada BOB</div>
+        </div>
+        <div class="hero-metric-box">
+          <div class="hmb-value" id="heroTotalUSDT">--</div>
+          <div class="hmb-label"><i class="fas fa-coins"></i> USDT en oferta</div>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#dashboard" class="btn-hero-primary">
+          <i class="fas fa-chart-bar"></i> Ver Dashboard
+        </a>
+        <div class="hero-update-tag">
+          <i class="fas fa-clock"></i>
+          Actualizado: <span id="heroLastUpdate">--</span>
+        </div>
+      </div>
+    </div>
+    <!-- RIGHT: Price Card -->
+    <div class="hero-right">
+      <div class="hero-price-card">
+        <div class="hpc-header">
+          <div class="hpc-token">
+            <div class="hpc-token-icon"><i class="fas fa-dollar-sign"></i></div>
+            <div>
+              <div class="hpc-token-name">USDT / BOB</div>
+              <div class="hpc-token-sub">Tether &middot; Boliviano</div>
+            </div>
+          </div>
+          <div class="hpc-source">Binance P2P</div>
+        </div>
+        <div class="hpc-price-main">
+          <span id="heroPriceMain">--</span><span class="hpc-currency">BOB</span>
+        </div>
+        <div class="hpc-price-label">Media Ponderada</div>
+        <div class="hpc-range">
+          <div class="hpc-range-item lo">
+            <div class="hpc-ri-label">Mínimo</div>
+            <div class="hpc-ri-val" id="heroPriceMin">--</div>
+          </div>
+          <div class="hpc-range-divider"></div>
+          <div class="hpc-range-item mid">
+            <div class="hpc-ri-label">Promedio</div>
+            <div class="hpc-ri-val" id="heroPriceMid">--</div>
+          </div>
+          <div class="hpc-range-divider"></div>
+          <div class="hpc-range-item hi">
+            <div class="hpc-ri-label">Máximo</div>
+            <div class="hpc-ri-val" id="heroPriceMax">--</div>
+          </div>
+        </div>
+        <div class="hpc-bar-wrap">
+          <div class="hpc-bar-track">
+            <div class="hpc-bar-fill" id="heroPriceBar" style="width:50%"></div>
+          </div>
+          <div class="hpc-bar-labels">
+            <span>Min</span><span>Distribución de precios</span><span>Max</span>
+          </div>
+        </div>
+        <div class="hpc-footer">
+          <span><i class="fas fa-users"></i> <span id="heroOferentes">--</span> oferentes</span>
+          <span><i class="fas fa-filter"></i> Filtro IQR activo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════
+     DASHBOARD SECTION
+═══════════════════════════════════════════════════ -->
+<main class="dashboard-section" id="dashboard">
+
+  <!-- FILTER BAR -->
+  <div class="db-filters">
+    <div class="filter-group">
+      <input type="checkbox" id="iqrToggle" checked>
+      <label class="filter-check-label" for="iqrToggle">
+        <i class="fas fa-filter" style="color:var(--db-gold);margin-right:.3rem"></i>
+        Filtro IQR (sin outliers)
+      </label>
+    </div>
+    <div class="filter-group">
+      <label>Precio BOB</label>
+      <input type="number" id="priceMinInput" placeholder="Mín" step="0.01"
+             style="width:80px">
+      <span style="color:var(--db-muted)">—</span>
+      <input type="number" id="priceMaxInput" placeholder="Máx" step="0.01"
+             style="width:80px">
+    </div>
+    <div class="filter-group">
+      <label>Método de pago</label>
+      <select id="payMethodFilter"><option value="all">Todos</option></select>
+    </div>
+    <!-- Admin-only upload (accesible con ?admin=1 en la URL) -->
+    <div class="filter-group" id="adminUploadGroup" style="display:none;margin-left:auto">
+      <button class="btn-upload" onclick="document.getElementById('jsonUpload').click()">
+        <i class="fas fa-upload"></i> Cargar JSON
+      </button>
+      <input type="file" id="jsonUpload" accept=".json" style="display:none">
+    </div>
+  </div>
+
+  <div class="db-wrap">
+
+    <!-- INFO BAR -->
+    <div class="db-infobar">
+      <div>
+        <div class="db-title">USDT BOLIVIA <span style="color:var(--db-gold)">—</span> Precio de compra</div>
+        <div class="db-subtitle">
+          Fecha: <strong id="dbDate" style="color:var(--db-text)">--</strong> &nbsp;|&nbsp;
+          Hrs: <strong id="dbHora" style="color:var(--db-text)">--</strong> &nbsp;|&nbsp;
+          Origen: <strong style="color:var(--db-text)">Binance P2P</strong>
+        </div>
+      </div>
+      <div class="db-badge" id="dbRecords">-- registros tras filtro</div>
+    </div>
+
+    <!-- LOADING STATE -->
+    <div class="db-dropzone" id="dropZone" style="display:none">
+      <i class="fas fa-chart-line"></i>
+      <p style="color:var(--db-text);font-weight:600">Cargando datos del mercado...</p>
+      <p>El dashboard se actualizará en breve</p>
+    </div>
+
+    <!-- DASHBOARD CONTENT (hidden until data loaded) -->
+    <div id="dbContent" style="display:none">
+
+      <!-- ROW 1: GAUGE | KPIs | TOP10 -->
+      <div class="db-row1" style="margin-bottom:1rem">
+
+        <!-- Gauge -->
+        <div class="db-card">
+          <div class="db-card-title">Min, Max y Media Ponderada</div>
+          <div class="db-gauge-wrap" id="gaugeContainer"></div>
+        </div>
+
+        <!-- KPI Stack -->
+        <div class="db-kpi-stack">
+          <div class="kpi-card">
+            <div class="kpi-value" id="kpiUSDT">--</div>
+            <div class="kpi-label">Oferta activa USDT</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-value" id="kpiOferentes">--</div>
+            <div class="kpi-label">Total oferentes</div>
+          </div>
+        </div>
+
+        <!-- Top 10 -->
+        <div class="db-card db-top10">
+          <div class="db-card-title">TOP 10 — Operaciones por usuario</div>
+          <canvas id="top10Chart"></canvas>
+        </div>
+
+      </div>
+
+      <!-- ROW 2: RANGE CHART -->
+      <div class="db-row2">
+        <div class="db-card">
+          <div class="db-card-title">Oferta USDT por rango de precios y cantidad de usuarios</div>
+          <canvas id="rangeChart"></canvas>
+        </div>
+      </div>
+
+      <!-- ROW 3: TABLES -->
+      <div class="db-row3">
+
+        <!-- User Table -->
+        <div class="db-card">
+          <div class="db-card-title">Oferta USDT por usuario</div>
+          <input class="db-table-search" id="userSearchInput"
+                 placeholder="&#xf002;  Buscar usuario..." type="text">
+          <div class="db-table-wrap">
+            <table class="db-table" id="userTable">
+              <thead>
+                <tr>
+                  <th data-col="nickName">Usuario</th>
+                  <th data-col="precio_prom" class="num">Precio Prom.</th>
+                  <th data-col="usdt_disp" class="num">USDT Disponible</th>
+                </tr>
+              </thead>
+              <tbody id="userTableBody"></tbody>
+              <tfoot><tr class="total-row" id="userTableFoot"></tr></tfoot>
+            </table>
+          </div>
+        </div>
+
+        <!-- Price Table -->
+        <div class="db-card">
+          <div class="db-card-title">Oferta por precio</div>
+          <div class="db-table-wrap">
+            <table class="db-table" id="priceTable">
+              <thead>
+                <tr>
+                  <th data-col="price">Precio</th>
+                  <th data-col="usdt_disp" class="num">USDT Disponible</th>
+                  <th data-col="vendors" class="num">Oferentes</th>
+                </tr>
+              </thead>
+              <tbody id="priceTableBody"></tbody>
+              <tfoot><tr class="total-row" id="priceTableFoot"></tr></tfoot>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /dbContent -->
+  </div><!-- /db-wrap -->
+</main>
+
+<!-- ═══════ ABOUT ═══════ -->
+<section class="about-section" id="about">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h2 class="section-title">
+                    <i class="fas fa-info-circle"></i> Acerca del Dashboard
+                </h2>
+                <p class="about-description">
+                    Este dashboard presenta un análisis detallado del mercado P2P de Binance específicamente
+                    para Bolivia, enfocándose en la criptomoneda USDT. Los datos incluyen
+                    órdenes de compra, proporcionando una visión completa del mercado local.
                 </p>
-                <div class="hero-stats">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="stat-info">
-                            <span class="stat-number" id="totalAds">210</span>
-                            <span class="stat-label">Anuncios Activos</span>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-coins"></i>
-                        </div>
-                        <div class="stat-info">
-                            <span class="stat-number">1</span>
-                            <span class="stat-label">Criptomonedas</span>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="stat-info">
-                            <span class="stat-number" id="lastUpdate">10:00</span>
-                            <span class="stat-label">Última Actualización</span>
-                        </div>
-                    </div>
+                <div class="features">
+                    <div class="feature"><i class="fas fa-check-circle"></i><span>Datos actualizados</span></div>
+                    <div class="feature"><i class="fas fa-check-circle"></i><span>Análisis específico para el mercado boliviano</span></div>
+                    <div class="feature"><i class="fas fa-check-circle"></i><span>Cobertura completa de USDT</span></div>
+                    <div class="feature"><i class="fas fa-check-circle"></i><span>Visualizaciones interactivas con filtros</span></div>
                 </div>
             </div>
-            <div class="hero-graphic">
-                <div class="crypto-icons">
-                    <div class="crypto-icon usdt">
-                        <i class="fab fa-bitcoin"></i>
-                        <span>USDT</span>
-                    </div>
-                    <!-- <div class="crypto-icon usdc">
-                        <i class="fas fa-dollar-sign"></i>
-                        <span>USDC</span>
-                    </div> -->
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Market Overview -->
-    <!-- <section class="market-overview">
-        <div class="container">
-            <h2 class="section-title">
-                <i class="fas fa-chart-bar"></i>
-                Resumen del Mercado
-            </h2>
-            <div class="market-cards">
-                <div class="market-card buy">
-                    <div class="card-header">
-                        <h3>Órdenes de Compra</h3>
-                        <i class="fas fa-arrow-up"></i>
-                    </div>
-                    <div class="card-stats">
-                        <div class="price-range">
-                            <span class="label">Rango de Precios</span>
-                            <span class="value" id="buyPriceRange">--- - ---</span>
-                        </div>
-                        <div class="avg-price">
-                            <span class="label">Precio Promedio</span>
-                            <span class="value" id="buyAvgPrice">---</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="market-card sell">
-                    <div class="card-header">
-                        <h3>Órdenes de Venta</h3>
-                        <i class="fas fa-arrow-down"></i>
-                    </div>
-                    <div class="card-stats">
-                        <div class="price-range">
-                            <span class="label">Rango de Precios</span>
-                            <span class="value" id="sellPriceRange">--- - ---</span>
-                        </div>
-                        <div class="avg-price">
-                            <span class="label">Precio Promedio</span>
-                            <span class="value" id="sellAvgPrice">---</span>
-                        </div>
+            <div class="about-graphic">
+                <div class="graphic-container">
+                    <div class="data-flow">
+                        <div class="flow-step"><i class="fab fa-bitcoin"></i><span>Binance P2P API</span></div>
+                        <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+                        <div class="flow-step"><i class="fas fa-database"></i><span>Procesamiento de Datos</span></div>
+                        <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+                        <div class="flow-step"><i class="fas fa-chart-line"></i><span>Dashboard Interactivo</span></div>
                     </div>
                 </div>
             </div>
         </div>
-    </section> -->
+    </div>
+</section>
 
-    <!-- Dashboard Section -->
-    <main class="dashboard-section" id="dashboard">
-        <div class="dashboard container">
-            
-            <img src="images/DASHBOARD USDT 1.04.2026.png" alt="dasboard datos P2P">
-
-        </div>
-    </main>
-    
-    
-    <!-- About Section -->
-    <section class="about-section" id="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2 class="section-title">
-                        <i class="fas fa-info-circle"></i>
-                        Acerca del Dashboard
-                    </h2>
-                    <p class="about-description">
-                        Este dashboard presenta un análisis detallado del mercado P2P de Binance específicamente 
-                        para Bolivia, enfocándose en la criptomoneda USDT. Los datos incluyen 
-                        órdenes de compra, proporcionando una visión completa del mercado local.
-                    </p>
-                    <div class="features">
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Datos actualizados</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Análisis específico para el mercado boliviano</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Cobertura completa de USDT</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Visualizaciones</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-graphic">
-                    <div class="graphic-container">
-                        <div class="data-flow">
-                            <div class="flow-step">
-                                <i class="fab fa-bitcoin"></i>
-                                <span>Binance P2P API</span>
-                            </div>
-                            <div class="flow-arrow">
-                                <i class="fas fa-arrow-down"></i>
-                            </div>
-                            <div class="flow-step">
-                                <i class="fas fa-database"></i>
-                                <span>Procesamiento de Datos</span>
-                            </div>
-                            <div class="flow-arrow">
-                                <i class="fas fa-arrow-down"></i>
-                            </div>
-                            <div class="flow-step">
-                                <i class="fas fa-chart-line"></i>
-                                <span>Power BI Dashboard</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- ═══════ DATA INFO ═══════ -->
+<section class="data-section" id="data">
+    <div class="container">
+        <h2 class="section-title"><i class="fas fa-database"></i> Información de los Datos</h2>
+        <div class="data-grid">
+            <div class="data-card">
+                <div class="data-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h3>Ubicación</h3><p>Datos específicos del mercado P2P de Bolivia</p>
+            </div>
+            <div class="data-card">
+                <div class="data-icon"><i class="fas fa-coins"></i></div>
+                <h3>Criptomonedas</h3><p>USDT (Tether)</p>
+            </div>
+            <div class="data-card">
+                <div class="data-icon"><i class="fas fa-exchange-alt"></i></div>
+                <h3>Tipos de Orden</h3><p>Órdenes de compra (Buy)</p>
+            </div>
+            <div class="data-card">
+                <div class="data-icon"><i class="fas fa-clock"></i></div>
+                <h3>Frecuencia</h3><p>Datos actualizados periódicamente</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Data Info Section -->
-    <section class="data-section" id="data">
-        <div class="container">
-            <h2 class="section-title">
-                <i class="fas fa-database"></i>
-                Información de los Datos
-            </h2>
-            <div class="data-grid">
-                <div class="data-card">
-                    <div class="data-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <h3>Ubicación</h3>
-                    <p>Datos específicos del mercado P2P de Bolivia</p>
-                </div>
-                <div class="data-card">
-                    <div class="data-icon">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <h3>Criptomonedas</h3>
-                    <p>USDT (Tether)</p>
-                </div>
-                <div class="data-card">
-                    <div class="data-icon">
-                        <i class="fas fa-exchange-alt"></i>
-                    </div>
-                    <h3>Tipos de Orden</h3>
-                    <p>Órdenes de compra (Buy)</p>
-                </div>
-                <div class="data-card">
-                    <div class="data-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3>Frecuencia</h3>
-                    <p>Datos actualizados</p>
-                </div>
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>P2P Bolivia Analytics</h3>
+                <p>Dashboard especializado en el análisis del mercado P2P de criptomonedas en Bolivia.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Enlaces</h4>
+                <ul>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#about">Acerca</a></li>
+                    <li><a href="#data">Datos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <p>Para consultas sobre los datos o el dashboard, por favor contáctanos.</p>
+                <a href="https://wa.me/+59164603790?text=">
+                    <img src="https://cdn-icons-png.flaticon.com/128/1384/1384023.png"
+                         alt="whatsapp" height="50px" width="50px">
+                </a>
             </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>P2P Bolivia Analytics</h3>
-                    <p>Dashboard especializado en el análisis del mercado P2P de criptomonedas en Bolivia.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Enlaces</h4>
-                    <ul>
-                        <li><a href="#dashboard">Dashboard</a></li>
-                        <li><a href="#about">Acerca</a></li>
-                        <li><a href="#data">Datos</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contacto</h4>
-                    <p>Para consultas sobre los datos o el dashboard, por favor contactanos.</p>
-                    <a href="https://wa.me/+59164603790?text=">
-                        <img src="https://cdn-icons-png.flaticon.com/128/1384/1384023.png" alt="whatsapp-icon" height="50px" width="50px">
-                    </a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 P2P Bolivia Analytics. Datos obtenidos de Binance P2P.</p>
-            </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 P2P Bolivia Analytics. Datos obtenidos de Binance P2P.</p>
         </div>
-    </footer>
+    </div>
+</footer>
 
-    <!-- Scripts -->
+<script src="script.js"></script>
 
-    <!-- Main Scripts -->
-    <script src="script.js"></script>
+<!-- ═══════════════════════════════════════════════════
+     DASHBOARD ENGINE
+═══════════════════════════════════════════════════ -->
+<script>
+(function () {
+  "use strict";
 
+  /* ── STATE ─────────────────────────────────────── */
+  const state = {
+    raw: [],
+    records: [],
+    filtered: [],
+    useIQR: true,
+    priceMin: null,
+    priceMax: null,
+    payMethod: "all",
+    userSearch: "",
+    userSort: { col: "precio_prom", dir: "asc" },
+    priceSort: { col: "price", dir: "asc" },
+  };
 
+  const charts = { top10: null, range: null };
 
-    <!-- jQuery (requerido por DataTables) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- DataTables JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"></script>
-    <!-- Script personalizado -->
-    <script type="module" src="static/script/tables.js"></script>
+  /* ── PARSE JSON ────────────────────────────────── */
+  function parseJSON(raw) {
+    return raw.map((item) => {
+      const adv = item.adv;
+      const adv_info = item.advertiser;
+      const payMethods = (adv.tradeMethods || []).map((m) => m.identifier || m.payType || "").filter(Boolean);
+      return {
+        nickName:        adv_info.nickName,
+        price:           parseFloat(adv.price),
+        available:       parseFloat(adv.tradableQuantity),
+        monthOrderCount: adv_info.monthOrderCount || 0,
+        monthFinishRate: adv_info.monthFinishRate || 0,
+        positiveRate:    adv_info.positiveRate || 0,
+        payMethods,
+        createTime: adv.createTime || 0,
+      };
+    });
+  }
 
+  /* ── APPLY FILTERS ─────────────────────────────── */
+  function applyFilters() {
+    let d = [...state.records];
+
+    if (state.useIQR) {
+      const prices = d.map((r) => r.price).sort((a, b) => a - b);
+      const q1 = prices[Math.floor(prices.length * 0.25)];
+      const q3 = prices[Math.floor(prices.length * 0.75)];
+      const iqr = q3 - q1;
+      const lo = q1 - 1.5 * iqr;
+      const hi = q3 + 1.5 * iqr;
+      d = d.filter((r) => r.price >= lo && r.price <= hi);
+    }
+
+    if (state.priceMin !== null) d = d.filter((r) => r.price >= state.priceMin);
+    if (state.priceMax !== null) d = d.filter((r) => r.price <= state.priceMax);
+
+    if (state.payMethod !== "all")
+      d = d.filter((r) => r.payMethods.includes(state.payMethod));
+
+    state.filtered = d;
+    document.getElementById("dbRecords").textContent =
+      d.length + " registros tras filtro";
+    render();
+  }
+
+  /* ── METRICS ───────────────────────────────────── */
+  function metrics() {
+    const d = state.filtered;
+    if (!d.length) return null;
+    const totalAvail = d.reduce((s, r) => s + r.available, 0);
+    const pricePond  = d.reduce((s, r) => s + r.price * r.available, 0) / totalAvail;
+    return {
+      totalAvail,
+      oferentes:  new Set(d.map((r) => r.nickName)).size,
+      priceMin:   Math.min(...d.map((r) => r.price)),
+      priceMax:   Math.max(...d.map((r) => r.price)),
+      pricePond,
+    };
+  }
+
+  /* ── RENDER ────────────────────────────────────── */
+  function render() {
+    const m = metrics();
+    if (!m) return;
+
+    document.getElementById("dbContent").style.display = "block";
+    document.getElementById("dropZone").style.display   = "none";
+
+    renderGauge(m.priceMin, m.priceMax, m.pricePond);
+    renderKPIs(m);
+    renderTop10();
+    renderRangeChart();
+    renderUserTable();
+    renderPriceTable();
+  }
+
+  /* ── GAUGE ─────────────────────────────────────── */
+  function renderGauge(min, max, value) {
+    const pct = (value - min) / (max - min || 1);
+    const R = 80, cx = 100, cy = 95;
+    // Semicircle: from angle 180° → 0° (left to right)
+    const arcLen = Math.PI * R; // ≈ 251.3
+
+    // compute needle endpoint
+    const angle = Math.PI - pct * Math.PI; // 180° to 0°
+    const nx = cx + R * 0.72 * Math.cos(angle);
+    const ny = cy - R * 0.72 * Math.sin(angle);
+
+    const html = `
+      <svg viewBox="0 0 200 105" xmlns="http://www.w3.org/2000/svg">
+        <!-- background arc -->
+        <path d="M ${cx-R} ${cy} A ${R} ${R} 0 0 1 ${cx+R} ${cy}"
+              fill="none" stroke="#2b3139" stroke-width="14" stroke-linecap="round"/>
+        <!-- value arc -->
+        <path d="M ${cx-R} ${cy} A ${R} ${R} 0 0 1 ${cx+R} ${cy}"
+              fill="none" stroke="#f0b90b" stroke-width="14" stroke-linecap="round"
+              stroke-dasharray="${(arcLen * pct).toFixed(1)} ${arcLen.toFixed(1)}"
+              />
+        <!-- needle -->
+        <line x1="${cx}" y1="${cy}" x2="${nx.toFixed(1)}" y2="${ny.toFixed(1)}"
+              stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="${cx}" cy="${cy}" r="4" fill="#00d4ff"/>
+        <!-- center value -->
+        <text x="${cx}" y="${cy - 14}" text-anchor="middle"
+              fill="#f0f0f0" font-size="20" font-weight="700"
+              font-family="Inter,sans-serif">${value.toFixed(2)}</text>
+        <text x="${cx}" y="${cy - 2}" text-anchor="middle"
+              fill="#848e9c" font-size="8" font-family="Inter,sans-serif">MEDIA PONDERADA</text>
+        <!-- min / max labels -->
+        <text x="${cx - R}" y="${cy + 16}" text-anchor="middle"
+              fill="#848e9c" font-size="10" font-family="Inter,sans-serif">${min.toFixed(2)}</text>
+        <text x="${cx + R}" y="${cy + 16}" text-anchor="middle"
+              fill="#848e9c" font-size="10" font-family="Inter,sans-serif">${max.toFixed(2)}</text>
+      </svg>`;
+    document.getElementById("gaugeContainer").innerHTML = html;
+  }
+
+  /* ── KPIs ──────────────────────────────────────── */
+  function renderKPIs(m) {
+    const fmt = (n) =>
+      n >= 1e6 ? (n / 1e6).toFixed(2) + "M" :
+      n >= 1e3 ? (n / 1e3).toFixed(1) + "K" :
+      n.toLocaleString("es-BO", { maximumFractionDigits: 0 });
+
+    animateCount("kpiUSDT",     m.totalAvail, fmt);
+    animateCount("kpiOferentes", m.oferentes, (n) => Math.round(n).toString());
+  }
+
+  function animateCount(id, target, fmt) {
+    const el  = document.getElementById(id);
+    const start = 0, dur = 900, step = 16;
+    let t = 0;
+    const timer = setInterval(() => {
+      t += step;
+      const progress = Math.min(t / dur, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = fmt(start + (target - start) * ease);
+      if (progress >= 1) clearInterval(timer);
+    }, step);
+  }
+
+  /* ── TOP 10 CHART ──────────────────────────────── */
+  function renderTop10() {
+    const d = state.filtered;
+    const byUser = {};
+    d.forEach((r) => {
+      if (!byUser[r.nickName] || byUser[r.nickName] < r.monthOrderCount)
+        byUser[r.nickName] = r.monthOrderCount;
+    });
+    const sorted = Object.entries(byUser)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10)
+      .reverse();
+
+    const labels = sorted.map((x) => x[0]);
+    const values = sorted.map((x) => x[1]);
+    const GOLD   = "#f0b90b";
+
+    const ctx = document.getElementById("top10Chart").getContext("2d");
+    if (charts.top10) charts.top10.destroy();
+    charts.top10 = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [{
+          data: values,
+          backgroundColor: GOLD + "cc",
+          borderColor: GOLD,
+          borderWidth: 1,
+          borderRadius: 4,
+        }],
+      },
+      options: {
+        indexAxis: "y",
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => ` ${ctx.parsed.x.toLocaleString()} órdenes`,
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: { color: "#2b3139" },
+            ticks: { color: "#848e9c", font: { size: 10 },
+              callback: (v) => v >= 1000 ? (v/1000).toFixed(0)+"K" : v },
+          },
+          y: { grid: { display: false }, ticks: { color: "#f0f0f0", font: { size: 10 } } },
+        },
+      },
+    });
+  }
+
+  /* ── RANGE CHART ───────────────────────────────── */
+  function renderRangeChart() {
+    const d = state.filtered;
+    const bins = {};
+    d.forEach((r) => {
+      const b = (Math.floor(r.price / 0.1) * 0.1).toFixed(2);
+      if (!bins[b]) bins[b] = { sum: 0, users: new Set() };
+      bins[b].sum += r.available;
+      bins[b].users.add(r.nickName);
+    });
+
+    const sorted = Object.keys(bins).map(Number).sort((a,b) => a-b);
+    const labels = sorted.map((k) => k.toFixed(2));
+    const sums   = sorted.map((k) => bins[k.toFixed(2)].sum);
+    const counts = sorted.map((k) => bins[k.toFixed(2)].users.size);
+
+    const ctx = document.getElementById("rangeChart").getContext("2d");
+    if (charts.range) charts.range.destroy();
+    charts.range = new Chart(ctx, {
+      data: {
+        labels,
+        datasets: [
+          {
+            type: "bar",
+            label: "Monto USDT disponible",
+            data: sums,
+            backgroundColor: "#42A5F5cc",
+            borderColor: "#42A5F5",
+            borderWidth: 1,
+            borderRadius: 4,
+            yAxisID: "y",
+          },
+          {
+            type: "line",
+            label: "Nro. de oferentes",
+            data: counts,
+            borderColor: "#f0b90b",
+            backgroundColor: "#f0b90b33",
+            pointBackgroundColor: "#f0b90b",
+            pointRadius: 5,
+            tension: 0.3,
+            yAxisID: "y2",
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: {
+            labels: { color: "#848e9c", font: { size: 11 } },
+          },
+          tooltip: { mode: "index", intersect: false },
+        },
+        scales: {
+          x: {
+            grid: { color: "#2b3139" },
+            ticks: { color: "#848e9c", font: { size: 10 } },
+            title: { display: true, text: "Precio BOB (bins 0.10)", color: "#848e9c", font: { size: 10 } },
+          },
+          y: {
+            grid: { color: "#2b3139" },
+            ticks: {
+              color: "#42A5F5",
+              font: { size: 10 },
+              callback: (v) => v >= 1000 ? (v/1000).toFixed(0)+"K" : v,
+            },
+            title: { display: true, text: "USDT disponible", color: "#42A5F5", font: { size: 10 } },
+          },
+          y2: {
+            position: "right",
+            grid: { display: false },
+            ticks: { color: "#f0b90b", font: { size: 10 } },
+            title: { display: true, text: "Nro. oferentes", color: "#f0b90b", font: { size: 10 } },
+          },
+        },
+      },
+    });
+  }
+
+  /* ── USER TABLE ────────────────────────────────── */
+  function buildUserAgg() {
+    const d = state.filtered;
+    const map = {};
+    d.forEach((r) => {
+      if (!map[r.nickName]) map[r.nickName] = { nickName: r.nickName, priceSum: 0, priceW: 0, usdt: 0 };
+      map[r.nickName].priceSum += r.price * r.available;
+      map[r.nickName].priceW  += r.available;
+      map[r.nickName].usdt    += r.available;
+    });
+    return Object.values(map).map((u) => ({
+      nickName:   u.nickName,
+      precio_prom: u.priceSum / u.priceW,
+      usdt_disp:  u.usdt,
+    }));
+  }
+
+  function renderUserTable() {
+    const search = state.userSearch.toLowerCase();
+    let rows = buildUserAgg();
+    if (search) rows = rows.filter((r) => r.nickName.toLowerCase().includes(search));
+
+    const { col, dir } = state.userSort;
+    rows.sort((a, b) => {
+      const v = col === "nickName"
+        ? a[col].localeCompare(b[col])
+        : a[col] - b[col];
+      return dir === "asc" ? v : -v;
+    });
+
+    const totalUSDT = rows.reduce((s, r) => s + r.usdt_disp, 0);
+    const avgPrice  = rows.reduce((s, r) => s + r.precio_prom * r.usdt_disp, 0) / (totalUSDT || 1);
+
+    const tbody = document.getElementById("userTableBody");
+    tbody.innerHTML = rows.map((r) => `
+      <tr>
+        <td>${escHtml(r.nickName)}</td>
+        <td class="num">${r.precio_prom.toFixed(2)}</td>
+        <td class="num">${fmtNum(r.usdt_disp)}</td>
+      </tr>`).join("");
+
+    document.getElementById("userTableFoot").innerHTML = `
+      <td>Total</td>
+      <td class="num">${avgPrice.toFixed(2)}</td>
+      <td class="num">${fmtNum(totalUSDT)}</td>`;
+
+    updateSortHeaders("userTable", state.userSort);
+  }
+
+  /* ── PRICE TABLE ───────────────────────────────── */
+  function buildPriceAgg() {
+    const map = {};
+    state.filtered.forEach((r) => {
+      const k = r.price.toFixed(2);
+      if (!map[k]) map[k] = { price: r.price, usdt_disp: 0, vendors: new Set() };
+      map[k].usdt_disp += r.available;
+      map[k].vendors.add(r.nickName);
+    });
+    return Object.values(map).map((p) => ({ ...p, vendors: p.vendors.size }));
+  }
+
+  function renderPriceTable() {
+    let rows = buildPriceAgg();
+    const { col, dir } = state.priceSort;
+    rows.sort((a, b) => {
+      const v = a[col] - b[col];
+      return dir === "asc" ? v : -v;
+    });
+
+    const totalUSDT = rows.reduce((s, r) => s + r.usdt_disp, 0);
+
+    document.getElementById("priceTableBody").innerHTML = rows.map((r) => `
+      <tr>
+        <td>${r.price.toFixed(2)}</td>
+        <td class="num">${fmtNum(r.usdt_disp)}</td>
+        <td class="num">${r.vendors}</td>
+      </tr>`).join("");
+
+    document.getElementById("priceTableFoot").innerHTML = `
+      <td>Total</td>
+      <td class="num">${fmtNum(totalUSDT)}</td>
+      <td class="num"></td>`;
+
+    updateSortHeaders("priceTable", state.priceSort);
+  }
+
+  /* ── HELPERS ───────────────────────────────────── */
+  function fmtNum(n) {
+    return n.toLocaleString("es-BO", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function escHtml(s) {
+    return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+  function updateSortHeaders(tableId, sort) {
+    document.querySelectorAll(`#${tableId} thead th`).forEach((th) => {
+      th.classList.remove("sort-asc","sort-desc");
+      if (th.dataset.col === sort.col)
+        th.classList.add(sort.dir === "asc" ? "sort-asc" : "sort-desc");
+    });
+  }
+
+  /* ── LOAD DATA ─────────────────────────────────── */
+  function loadData(raw) {
+    state.raw     = raw;
+    state.records = parseJSON(raw);
+
+    // Extract payment methods for filter
+    const allMethods = new Set();
+    state.records.forEach((r) => r.payMethods.forEach((m) => allMethods.add(m)));
+    const sel = document.getElementById("payMethodFilter");
+    sel.innerHTML = '<option value="all">Todos</option>';
+    [...allMethods].sort().forEach((m) => {
+      const o = document.createElement("option");
+      o.value = m; o.textContent = m;
+      sel.appendChild(o);
+    });
+
+    // Set date info from data
+    const now = new Date();
+    const meses = ["enero","febrero","marzo","abril","mayo","junio",
+                   "julio","agosto","septiembre","octubre","noviembre","diciembre"];
+    document.getElementById("dbDate").textContent =
+      `${now.getDate()} de ${meses[now.getMonth()]} ${now.getFullYear()}`;
+    document.getElementById("dbHora").textContent =
+      now.toTimeString().slice(0,5);
+
+    // Update hero stats
+    document.getElementById("heroTotalAds").textContent  = state.records.length;
+    document.getElementById("heroLastUpdate").textContent = now.toTimeString().slice(0,5);
+
+    // Hero price card — IQR filtered metrics
+    const _ap = state.records.map(r=>r.price).sort((a,b)=>a-b);
+    const _q1 = _ap[Math.floor(_ap.length*.25)], _q3 = _ap[Math.floor(_ap.length*.75)];
+    const _fh = state.records.filter(r=>r.price>=_q1-1.5*(_q3-_q1)&&r.price<=_q3+1.5*(_q3-_q1));
+    const _ta = _fh.reduce((s,r)=>s+r.available,0);
+    const _av = _fh.reduce((s,r)=>s+r.price*r.available,0)/(_ta||1);
+    const _mn = Math.min(..._fh.map(r=>r.price)), _mx = Math.max(..._fh.map(r=>r.price));
+    const _pct = Math.round(((_av-_mn)/(_mx-_mn||1))*100);
+    const _fm  = n => n>=1e6?(n/1e6).toFixed(2)+"M":n>=1e3?(n/1e3).toFixed(1)+"K":n.toFixed(0);
+    document.getElementById("heroPriceMain").textContent = _av.toFixed(2);
+    document.getElementById("heroPriceMid").textContent  = _av.toFixed(2);
+    document.getElementById("heroPriceMin").textContent  = _mn.toFixed(2);
+    document.getElementById("heroPriceMax").textContent  = _mx.toFixed(2);
+    document.getElementById("heroPriceBar").style.width  = _pct + "%";
+    document.getElementById("heroOferentes").textContent = new Set(_fh.map(r=>r.nickName)).size;
+    document.getElementById("heroAvgPrice").textContent  = _av.toFixed(2);
+    document.getElementById("heroTotalUSDT").textContent = _fm(_ta);
+
+    // Reset price range inputs
+    const prices = state.records.map((r) => r.price);
+    document.getElementById("priceMinInput").placeholder = Math.min(...prices).toFixed(2);
+    document.getElementById("priceMaxInput").placeholder = Math.max(...prices).toFixed(2);
+
+    applyFilters();
+  }
+
+  /* ── AUTO-FETCH ────────────────────────────────── */
+  async function autoLoad() {
+    const isAdmin = new URLSearchParams(window.location.search).get("admin") === "1";
+    if (isAdmin) document.getElementById("adminUploadGroup").style.display = "flex";
+
+    const paths = ["./json_file/latest_buy_usdt.json", "./json_file/latest_buy.json"];
+    for (const p of paths) {
+      try {
+        const r = await fetch(p);
+        if (!r.ok) continue;
+        loadData(await r.json());
+        return;
+      } catch (_) {}
+    }
+    // No data found
+    const dz = document.getElementById("dropZone");
+    dz.style.display = "block";
+    if (isAdmin) {
+      dz.innerHTML = '<i class="fas fa-cloud-upload-alt" style="color:var(--db-gold)"></i>' +
+        '<p style="color:var(--db-text);font-weight:600">Ningún archivo encontrado</p>' +
+        '<p>Arrastra un JSON o usa <strong style="color:var(--db-gold)">Cargar JSON</strong></p>' +
+        '<p style="font-size:.75rem;margin-top:.5rem">Ruta: <code style="background:var(--db-card2);padding:.1rem .4rem;border-radius:4px">json_file/latest_buy_usdt.json</code></p>';
+      dz.style.cursor = "pointer";
+      dz.onclick = () => document.getElementById("jsonUpload").click();
+    } else {
+      dz.innerHTML = '<i class="fas fa-sync-alt" style="color:var(--db-muted);font-size:2rem"></i>' +
+        '<p style="color:var(--db-text);font-weight:600;margin-top:.75rem">Dashboard en actualización</p>' +
+        '<p>Los datos se publicarán próximamente</p>';
+    }
+  }
+
+  /* ── FILE UPLOAD ───────────────────────────────── */
+  function handleFile(file) {
+    if (!file || !file.name.endsWith(".json")) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try { loadData(JSON.parse(e.target.result)); }
+      catch (_) { alert("Error al leer el archivo JSON."); }
+    };
+    reader.readAsText(file);
+  }
+
+  document.getElementById("jsonUpload").addEventListener("change", (e) => {
+    handleFile(e.target.files[0]);
+  });
+
+  /* ── DRAG & DROP ───────────────────────────────── */
+  const dz = document.getElementById("dropZone");
+  dz.addEventListener("click", () => document.getElementById("jsonUpload").click());
+  dz.addEventListener("dragover", (e) => { e.preventDefault(); dz.classList.add("drag-over"); });
+  dz.addEventListener("dragleave", () => dz.classList.remove("drag-over"));
+  dz.addEventListener("drop", (e) => {
+    e.preventDefault(); dz.classList.remove("drag-over");
+    handleFile(e.dataTransfer.files[0]);
+  });
+
+  /* ── FILTER EVENTS ─────────────────────────────── */
+  document.getElementById("iqrToggle").addEventListener("change", (e) => {
+    state.useIQR = e.target.checked; applyFilters();
+  });
+  document.getElementById("priceMinInput").addEventListener("input", (e) => {
+    state.priceMin = e.target.value ? parseFloat(e.target.value) : null; applyFilters();
+  });
+  document.getElementById("priceMaxInput").addEventListener("input", (e) => {
+    state.priceMax = e.target.value ? parseFloat(e.target.value) : null; applyFilters();
+  });
+  document.getElementById("payMethodFilter").addEventListener("change", (e) => {
+    state.payMethod = e.target.value; applyFilters();
+  });
+  document.getElementById("userSearchInput").addEventListener("input", (e) => {
+    state.userSearch = e.target.value;
+    if (state.filtered.length) renderUserTable();
+  });
+
+  /* ── TABLE SORT EVENTS ─────────────────────────── */
+  document.querySelectorAll("#userTable thead th").forEach((th) => {
+    th.addEventListener("click", () => {
+      const col = th.dataset.col;
+      if (state.userSort.col === col)
+        state.userSort.dir = state.userSort.dir === "asc" ? "desc" : "asc";
+      else { state.userSort.col = col; state.userSort.dir = "asc"; }
+      renderUserTable();
+    });
+  });
+  document.querySelectorAll("#priceTable thead th").forEach((th) => {
+    th.addEventListener("click", () => {
+      const col = th.dataset.col;
+      if (state.priceSort.col === col)
+        state.priceSort.dir = state.priceSort.dir === "asc" ? "desc" : "asc";
+      else { state.priceSort.col = col; state.priceSort.dir = "asc"; }
+      renderPriceTable();
+    });
+  });
+
+  /* ── BOOT ──────────────────────────────────────── */
+  autoLoad();
+
+})();
+</script>
 
 </body>
 </html>
