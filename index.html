@@ -807,12 +807,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     let d = [...state.records];
 
     if (state.useIQR) {
-      const prices = d.map((r) => r.price).sort((a, b) => a - b);
-      const q1 = prices[Math.floor(prices.length * 0.25)];
-      const q3 = prices[Math.floor(prices.length * 0.75)];
-      const iqr = q3 - q1;
-      const lo = q1 - 1.5 * iqr;
-      const hi = q3 + 1.5 * iqr;
+      // Distribución normal — intervalo de confianza 90% (z = 1.645)
+      const prices = d.map((r) => r.price);
+      const n    = prices.length;
+      const mean = prices.reduce((s, v) => s + v, 0) / n;
+      const std  = Math.sqrt(prices.reduce((s, v) => s + (v - mean) ** 2, 0) / n);
+      const z    = 1.645; // 90% CI
+      const lo   = mean - z * std;
+      const hi   = mean + z * std;
       d = d.filter((r) => r.price >= lo && r.price <= hi);
     }
 
@@ -1197,10 +1199,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     document.getElementById("heroTotalAds").textContent  = state.records.length;
     document.getElementById("heroLastUpdate").textContent = now.toTimeString().slice(0,5);
 
-    // Hero price card — IQR filtered metrics
-    const _ap = state.records.map(r=>r.price).sort((a,b)=>a-b);
-    const _q1 = _ap[Math.floor(_ap.length*.25)], _q3 = _ap[Math.floor(_ap.length*.75)];
-    const _fh = state.records.filter(r=>r.price>=_q1-1.5*(_q3-_q1)&&r.price<=_q3+1.5*(_q3-_q1));
+    // Hero price card — Normal 90% CI filter
+    const _ap = state.records.map(r=>r.price);
+    const _n  = _ap.length;
+    const _mu = _ap.reduce((s,v)=>s+v,0)/_n;
+    const _sd = Math.sqrt(_ap.reduce((s,v)=>s+(v-_mu)**2,0)/_n);
+    const _fh = state.records.filter(r=>r.price>=_mu-1.645*_sd&&r.price<=_mu+1.645*_sd);
     const _ta = _fh.reduce((s,r)=>s+r.available,0);
     const _av = _fh.reduce((s,r)=>s+r.price*r.available,0)/(_ta||1);
     const _mn = Math.min(..._fh.map(r=>r.price)), _mx = Math.max(..._fh.map(r=>r.price));
