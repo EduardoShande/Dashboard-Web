@@ -857,6 +857,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     renderGauge(m.priceMin, m.priceMax, m.pricePond);
     renderKPIs(m);
+    renderHero(m);
     renderTop10();
     renderRangeChart();
     renderUserTable();
@@ -935,6 +936,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       el.textContent = fmt(start + (target - start) * ease);
       if (progress >= 1) clearInterval(timer);
     }, step);
+  }
+
+  /* ── HERO PRICE CARD ──────────────────────────────── */
+  function renderHero(m) {
+    const fmt = n => n>=1e6?(n/1e6).toFixed(2)+"M":n>=1e3?(n/1e3).toFixed(1)+"K":n.toFixed(0);
+    const pct  = Math.round(((m.pricePond - m.priceMin) / (m.priceMax - m.priceMin || 1)) * 100);
+    const ofH  = new Set(state.filtered.map(r => r.nickName)).size;
+    document.getElementById("heroPriceMain").textContent = m.pricePond.toFixed(2);
+    document.getElementById("heroPriceMid").textContent  = m.pricePond.toFixed(2);
+    document.getElementById("heroPriceMin").textContent  = m.priceMin.toFixed(2);
+    document.getElementById("heroPriceMax").textContent  = m.priceMax.toFixed(2);
+    document.getElementById("heroPriceBar").style.width  = pct + "%";
+    document.getElementById("heroOferentes").textContent = ofH;
+    document.getElementById("heroAvgPrice").textContent  = m.pricePond.toFixed(2);
+    document.getElementById("heroTotalUSDT").textContent = fmt(m.totalAvail);
   }
 
   /* ── TOP 10 CHART ──────────────────────────────── */
@@ -1202,25 +1218,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     document.getElementById("heroTotalAds").textContent  = state.records.length;
     document.getElementById("heroLastUpdate").textContent = now.toTimeString().slice(0,5);
 
-    // Hero price card — Normal 90% CI filter
-    const _ap = state.records.map(r=>r.price);
-    const _n  = _ap.length;
-    const _mu = _ap.reduce((s,v)=>s+v,0)/_n;
-    const _sd = Math.sqrt(_ap.reduce((s,v)=>s+(v-_mu)**2,0)/_n);
-    const _fh = state.records.filter(r=>r.price>=_mu-1.96*_sd&&r.price<=_mu+1.96*_sd);
-    const _ta = _fh.reduce((s,r)=>s+r.available,0);
-    const _av = _fh.reduce((s,r)=>s+r.price*r.available,0)/(_ta||1);
-    const _mn = Math.min(..._fh.map(r=>r.price)), _mx = Math.max(..._fh.map(r=>r.price));
-    const _pct = Math.round(((_av-_mn)/(_mx-_mn||1))*100);
-    const _fm  = n => n>=1e6?(n/1e6).toFixed(2)+"M":n>=1e3?(n/1e3).toFixed(1)+"K":n.toFixed(0);
-    document.getElementById("heroPriceMain").textContent = _av.toFixed(2);
-    document.getElementById("heroPriceMid").textContent  = _av.toFixed(2);
-    document.getElementById("heroPriceMin").textContent  = _mn.toFixed(2);
-    document.getElementById("heroPriceMax").textContent  = _mx.toFixed(2);
-    document.getElementById("heroPriceBar").style.width  = _pct + "%";
-    document.getElementById("heroOferentes").textContent = new Set(_fh.map(r=>r.nickName)).size;
-    document.getElementById("heroAvgPrice").textContent  = _av.toFixed(2);
-    document.getElementById("heroTotalUSDT").textContent = _fm(_ta);
+    // Hero price card is updated in render() using state.filtered
 
     // Reset price range inputs
     const prices = state.records.map((r) => r.price);
