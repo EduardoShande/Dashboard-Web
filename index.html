@@ -806,6 +806,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function applyFilters() {
     let d = [...state.records];
 
+    // Filtro de precio máximo absoluto
+    d = d.filter((r) => r.price <= 10.5);
+
     if (state.useIQR) {
       // Distribución normal — intervalo de confianza 90% (z = 1.645)
       const prices = d.map((r) => r.price);
