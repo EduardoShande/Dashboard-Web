@@ -815,7 +815,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const n    = prices.length;
       const mean = prices.reduce((s, v) => s + v, 0) / n;
       const std  = Math.sqrt(prices.reduce((s, v) => s + (v - mean) ** 2, 0) / n);
-      const z    = 1.645; // 90% CI
+      const z    = 1.96;  // 95% CI
       const lo   = mean - z * std;
       const hi   = mean + z * std;
       d = d.filter((r) => r.price >= lo && r.price <= hi);
@@ -1207,7 +1207,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const _n  = _ap.length;
     const _mu = _ap.reduce((s,v)=>s+v,0)/_n;
     const _sd = Math.sqrt(_ap.reduce((s,v)=>s+(v-_mu)**2,0)/_n);
-    const _fh = state.records.filter(r=>r.price>=_mu-1.645*_sd&&r.price<=_mu+1.645*_sd);
+    const _fh = state.records.filter(r=>r.price>=_mu-1.96*_sd&&r.price<=_mu+1.96*_sd);
     const _ta = _fh.reduce((s,r)=>s+r.available,0);
     const _av = _fh.reduce((s,r)=>s+r.price*r.available,0)/(_ta||1);
     const _mn = Math.min(..._fh.map(r=>r.price)), _mx = Math.max(..._fh.map(r=>r.price));
