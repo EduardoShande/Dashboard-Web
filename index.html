@@ -815,7 +815,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const wMean   = d.reduce((s, r) => s + r.price * r.available, 0) / totalW;
       const wVar    = d.reduce((s, r) => s + r.available * (r.price - wMean) ** 2, 0) / totalW;
       const wStd    = Math.sqrt(wVar);
-      const z       = 1.96;  // 95% CI
+      const z       = 2.576;  // 99% CI
       const lo      = wMean - z * wStd;
       const hi      = wMean + z * wStd;
       d = d.filter((r) => r.price >= lo && r.price <= hi);
