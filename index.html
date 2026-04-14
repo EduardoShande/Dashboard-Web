@@ -810,14 +810,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     d = d.filter((r) => r.price <= 10.5);
 
     if (state.useIQR) {
-      // Distribución normal — intervalo de confianza 90% (z = 1.645)
-      const prices = d.map((r) => r.price);
-      const n    = prices.length;
-      const mean = prices.reduce((s, v) => s + v, 0) / n;
-      const std  = Math.sqrt(prices.reduce((s, v) => s + (v - mean) ** 2, 0) / n);
-      const z    = 1.96;  // 95% CI
-      const lo   = mean - z * std;
-      const hi   = mean + z * std;
+      // Distribución normal — media ponderada, intervalo de confianza 95% (z = 1.96)
+      const totalW  = d.reduce((s, r) => s + r.available, 0);
+      const wMean   = d.reduce((s, r) => s + r.price * r.available, 0) / totalW;
+      const wVar    = d.reduce((s, r) => s + r.available * (r.price - wMean) ** 2, 0) / totalW;
+      const wStd    = Math.sqrt(wVar);
+      const z       = 1.96;  // 95% CI
+      const lo      = wMean - z * wStd;
+      const hi      = wMean + z * wStd;
       d = d.filter((r) => r.price >= lo && r.price <= hi);
     }
 
